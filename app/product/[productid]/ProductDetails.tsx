@@ -3,9 +3,10 @@
 import Button from "@/app/components/Button";
 import SetColor from "@/app/components/products/SetColor";
 import SetQuantity from "@/app/components/products/SetQuantity";
+import { useCart } from "@/hooks/useCart";
 import { Rating } from "@mui/material";
 import { useCallback, useState } from "react";
-import { ProductImage } from "../../components/products/ProductImages";
+// import { ProductImage } from "../../components/products/ProductImages";
 
 interface ProductDetailsProps {
   product: any;
@@ -29,6 +30,7 @@ const Horizontal = () => {
   return <hr className="w-[30%] m-2" />;
 };
 const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
+  const { cartTotalQty } = useCart();
   const [cartProduct, setCartProduct] = useState<CartProductType>({
     id: product.id,
 
@@ -40,7 +42,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
     quantity: 1,
     price: product.price,
   });
-  console.log(cartProduct);
+  console.log(cartTotalQty);
   const productRating =
     product.reviews.reduce((acc: number, item: any) => item.rating + acc, 0) /
     product.reviews.length;
@@ -70,7 +72,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
   }, [cartProduct]);
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-      <ProductImage />
+      {/* <ProductImage /> */}Images
       <div className="flex flex-col gap-1 text-slate-500 text-sm">
         <h2 className="text-3xl font-medium text-slate-700">{product.name}</h2>
         <div className="flex items-center gap-2">
